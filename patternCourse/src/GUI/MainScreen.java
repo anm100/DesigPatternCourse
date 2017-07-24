@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTabbedPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.Font;
 
 public class MainScreen extends JFrame {
 	public MainScreen() {
@@ -14,6 +15,7 @@ public class MainScreen extends JFrame {
 		JButton button = new JButton("New button");
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
+		tabbedPane.setFont(new Font("Microsoft YaHei", Font.PLAIN, 25));
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
@@ -34,14 +36,14 @@ public class MainScreen extends JFrame {
 					.addGap(17))
 		);
 		
-		JPanel panel = new JPanel();
-		tabbedPane.addTab("111111111111", null, panel, null);
+		AirConditionersGUI airCond = new AirConditionersGUI();
+		tabbedPane.addTab("AirConditioners", null, airCond.getFrame(), null);
 		getContentPane().setLayout(groupLayout);
 		JPanel panel1 = new JPanel();
-		tabbedPane.addTab("2111111111", null, panel1, null);
+		tabbedPane.addTab("Refrigerators", null, panel1, null);
 		getContentPane().setLayout(groupLayout);
 		JPanel panel2 = new JPanel();
-		tabbedPane.addTab("311111111", null, panel2, null);
+		tabbedPane.addTab("VacuumCleaners", null, panel2, null);
 		getContentPane().setLayout(groupLayout);
 	}
 }
