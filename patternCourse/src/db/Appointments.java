@@ -30,16 +30,7 @@ import Utils.Request;
  */
 public class Appointments extends View {
 
-	/**
-	 * Query to get specific patient all future appointments.
-	 * 
-	 * @param request
-	 *            : "appointments/getPatientAppointments" ,HashMap params:
-	 *            ("patient_id","curr_date").
-	 * 
-	 * @return Array list of all future patient's appointment.
-	 * 
-	 */
+
 	public Object getPatientAppointments(Request request) {
 		DbHandler db = MyConnection.getConfig().getHandler();
 		QueryBuilder<Appointment, Integer> q = db.appointments.queryBuilder();

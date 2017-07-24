@@ -22,10 +22,10 @@ public class DbHandler {
 
 	private ConnectionSource connection;
 
-	public Dao<Refrigerators, String> refrigerators;
-	public Dao<AirConditioners, String> airConditioners;
+	public Dao<Refrigerators, Integer> refrigerators;
+	public Dao<AirConditioners, Integer> airConditioners;
 
-	public Dao<VacuumCleaners, String> vacuumCleaners;
+	public Dao<VacuumCleaners, Integer> vacuumCleaners;
 
 
 	/**
@@ -40,7 +40,7 @@ public class DbHandler {
 			connection = new JdbcConnectionSource(url, username, password);
 			createAllTables();
 			initializeDao();
-//			fillDataBase();
+			fillDataBase();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -53,23 +53,12 @@ public class DbHandler {
 	 */
 	public void fillDataBase() throws Exception {
 		DataFiller df = new DataFiller(this);
-		df.fillClinics();
-		df.fillDoctors();
-		df.fillPatients();
-		df.fillconfirmation();
-		df.fillMedicalRecords();
-		df.fillAppointments();
-		df.fillStatistics();
-		df.fillShifts();
-		df.fillDispatchers();
-		df.fillManagers();
-	}
+		df.fillAirConditioners();
+		df.fillRefrigerators();
+		df.fillVacuumCleaners();
 
-	/**
-	 * initializes all the DAO for ORM usage
-	 * 
-	 * @throws Exception
-	 */
+	}
+		
 	public void initializeDao() throws Exception {
 		refrigerators = DaoManager.createDao(connection, Refrigerators.class);
 		airConditioners = DaoManager.createDao(connection, AirConditioners.class);
@@ -83,9 +72,9 @@ public class DbHandler {
 	 * @throws Exception
 	 */
 	public void createAllTables() throws Exception {
-//		TableUtils.dropTable(connection, Manager.class, true);
-//		TableUtils.dropTable(connection, Param.class, true);
-
+		TableUtils.dropTable(connection, Refrigerators.class,true);
+		TableUtils.dropTable(connection, AirConditioners.class,true);
+		TableUtils.dropTable(connection, VacuumCleaners.class,true);
 
 		TableUtils.createTable(connection, Refrigerators.class);
 		TableUtils.createTable(connection, AirConditioners.class);
