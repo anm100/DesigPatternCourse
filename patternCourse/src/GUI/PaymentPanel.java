@@ -7,11 +7,14 @@ import javax.swing.JLabel;
 import javax.swing.ListSelectionModel;
 
 import Models.AirConditioners;
+import Models.Payment;
 import Models.Product;
 import Utils.Messages;
 import Utils.MyTableModel;
 
 //import org.eclipse.wb.swing.FocusTraversalOnArray;
+
+
 
 
 
@@ -34,46 +37,39 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-import controller.controller;
+import controller.AirConditionController;
+import controller.PaymentController;
 
 import java.util.ArrayList;
 import java.util.List;
 /**
- * Appointments window , shows all needed information about specific patient :
- * shows all patient's future appointments sorted in table by appointment time
- * Ascending. option for add new appointment for this patient option to cancel
- * specific appointment.
- * 
  * @author Muhamad Igbaria
  *
  */
-public class AirConditionersGUI extends JPanel {
+public class PaymentPanel extends JPanel {
 
 	/**
-	 * appointments frame
 	 */
 	private JPanel app;
 	/**
-	 * all future patient's appointments table
 	 */
 	private JTable apps_table;
 	JButton cancel_btn;
 
 	/**
-	 * the patient to show his information
 	 */
 
-	private AirConditionersGUI thisref=this;
-	private ArrayList<Product> apps_list= new  ArrayList<Product>();
-	private ArrayList<AirConditioners> data;
-	controller cont;
+	private PaymentPanel thisref=this;
+	private ArrayList<Payment> apps_list= new  ArrayList<Payment>();
+	private ArrayList<Payment> data;
+	PaymentController cont;
 
 	/**
 	 * 
 	 * @param patient
 	 *            : Models Patient instance
 	 */
-	public AirConditionersGUI() {
+	public PaymentPanel() {
 		initialize();
 	}
 	/**
@@ -106,7 +102,7 @@ public class AirConditionersGUI extends JPanel {
 				logo.setFont(new Font("Microsoft New Tai Lue", Font.BOLD, 17));
 				logo.setBackground(Color.WHITE);
 
-		 cont=new controller(thisref);
+		 cont=new PaymentController(thisref);
 
 		cancel_btn = new JButton("delete selected product");
 		cancel_btn.addActionListener((ActionListener) cont);
@@ -141,7 +137,7 @@ public class AirConditionersGUI extends JPanel {
 		apps_scrollPane.setBounds(10, 147, 732, 307);
 		app.add(apps_scrollPane);
 
-		String[] doc_columnNames = { "sid","product name","production Year","price","quantity in store"};
+		String[] doc_columnNames = { "sid","product name","price","quantity in store"};
 		Object[][] doc_data = {};
 		apps_table = new JTable();
 		apps_table.setModel(new MyTableModel(doc_columnNames, doc_data));
@@ -214,9 +210,9 @@ public class AirConditionersGUI extends JPanel {
 			dm.setRowCount(0);
 			if (apps_list != null && apps_list.size() > 0)
 				apps_list.clear();
-			for (Product  a : data) {
+			for (Payment  a : data) {
 				dm.addRow(new Object[] { a.getSid(),a.getProductName()
-						,a.getProductionYear(),a.getPrice(),a.getQuantity()});
+						,a.getPrice(),a.getQuantity()});
 				apps_list.add(a);
 			}
 		}
@@ -235,10 +231,10 @@ public class AirConditionersGUI extends JPanel {
 	public JTable getApps_table() {
 		return apps_table;
 	}
-	public ArrayList<Product> getApps_list() {
+	public ArrayList<Payment> getApps_list() {
 		return apps_list;
 	}
-	public void setdata(ArrayList<AirConditioners> list){
+	public void setdata(ArrayList<Payment> list){
 		
 		 this.data=list;
 	}

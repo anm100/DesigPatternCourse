@@ -8,22 +8,24 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
-import GUI.AirConditionersGUI;
+
+import GUI.AddToPaymentGUI;
+import GUI.AirConditionersPanel;
 import Models.*;
 import Utils.Logger;
 
-public class controller implements ActionListener {
+public class AirConditionController implements ActionListener {
 
 
 	//ArrayList<Product> 
 	private JPanel app;
-	public controller(AirConditionersGUI app) {
+	public AirConditionController(AirConditionersPanel app) {
 		// TODO Auto-generated constructor stub
 	this.app=app;
 	getProductsToGUI(app);
 	}
-	public void getProductsToGUI(AirConditionersGUI app) {
-		((AirConditionersGUI) app).setdata((ArrayList<AirConditioners>) AirConditioners.getProducts()); 
+	public void getProductsToGUI(AirConditionersPanel app) {
+		((AirConditionersPanel) app).setdata((ArrayList<AirConditioners>) AirConditioners.getProducts()); 
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -35,16 +37,16 @@ public class controller implements ActionListener {
 		case ("_order_product"):
 			Logger.getInstance().debug("click order button");
 
-			row = ((AirConditionersGUI) app).getApps_table().getSelectedRow();
-			product= (AirConditioners) ((AirConditionersGUI) app).getApps_list().get(row);
+			row = ((AirConditionersPanel) app).getApps_table().getSelectedRow();
+			product= (AirConditioners) ((AirConditionersPanel) app).getApps_list().get(row);
 			
-			Logger.getInstance().debug("add quntity to "+product.getProductName());
+			Logger.getInstance().debug("add quantity to "+product.getProductName());
 			product.setQuantity(product.getQuantity()+30);
-			((AirConditionersGUI) app).getApps_list().set(row, product);
+			((AirConditionersPanel) app).getApps_list().set(row, product);
 			
 			Logger.getInstance().debug("update value in gui ");
-			((AirConditionersGUI) app).getApps_table().getModel().setValueAt(product.getQuantity(), row, 4);
-			((AirConditionersGUI) app).getApps_table().updateUI();
+			((AirConditionersPanel) app).getApps_table().getModel().setValueAt(product.getQuantity(), row, 4);
+			((AirConditionersPanel) app).getApps_table().updateUI();
 			Logger.getInstance().debug("update value in gui ");
 			try {
 				product.update();
@@ -55,9 +57,9 @@ public class controller implements ActionListener {
 			break;
 		case ("_add_product_card"):
 			Logger.getInstance().debug("product add to payment /card");
-		row = ((AirConditionersGUI) app).getApps_table().getSelectedRow();
-		product= (AirConditioners) ((AirConditionersGUI) app).getApps_list().get(row);
-		Payment p = new Payment();
+		row = ((AirConditionersPanel) app).getApps_table().getSelectedRow();
+		AddToPaymentGUI addGui=new AddToPaymentGUI(app,(AirConditioners) ((AirConditionersPanel) app).getApps_list().get(row));
+		addGui.setVisible(true);
 		
 		break;
 

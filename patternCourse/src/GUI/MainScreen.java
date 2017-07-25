@@ -35,7 +35,7 @@ public class MainScreen extends JFrame {
 					.addGap(17))
 		);
 		
-		AirConditionersGUI airCond = new AirConditionersGUI();
+		AirConditionersPanel airCond = new AirConditionersPanel();
 		tabbedPane.addTab("AirConditioners", null, airCond.getFrame(), null);
 		getContentPane().setLayout(groupLayout);
 		JPanel panel1 = new JPanel();

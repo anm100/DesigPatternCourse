@@ -45,7 +45,7 @@ public class Messages {
  */
 	public static void successMessage(String message, String title, Component c) {
 		JOptionPane.showMessageDialog(c, message, title, JOptionPane.INFORMATION_MESSAGE,
-				Resources.getIcon("success.png"));
+			null);
 	}
 /**
  * @param message: Confirm message

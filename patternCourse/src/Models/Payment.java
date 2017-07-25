@@ -1,8 +1,11 @@
 package Models;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+
+import Utils.MyConnection;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.misc.BaseDaoEnabled;
@@ -49,8 +52,16 @@ public class Payment  extends BaseDaoEnabled implements Serializable {
 		return sid;
 	}
 
-
-	public void addProduct() {
+	public static List<Payment> getProducts(){
+		try {
+			return MyConnection.getCon().getHandler().payment.queryForAll();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	public void addProduct(Product product) {
 		// TODO Auto-generated method stub
 		
 	}
