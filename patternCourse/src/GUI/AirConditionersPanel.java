@@ -67,13 +67,16 @@ public class AirConditionersPanel extends JPanel {
 	private ArrayList<Product> apps_list= new  ArrayList<Product>();
 	private ArrayList<AirConditioners> data;
 	AirConditionController cont;
+	MainScreen mainScreen; 
 
 	/**
 	 * 
-	 * @param patient
+	 * @param mainScreen 
+	 * 
 	 *            : Models Patient instance
 	 */
-	public AirConditionersPanel() {
+	public AirConditionersPanel(MainScreen mainScreen) {
+		this.mainScreen=mainScreen;
 		initialize();
 	}
 	/**
@@ -212,4 +215,8 @@ public class AirConditionersPanel extends JPanel {
 		
 		 this.data=list;
 	}
+	public MainScreen getMainScreen() {
+		return mainScreen;
+	}
+	
 }

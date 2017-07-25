@@ -12,6 +12,7 @@ import com.j256.ormlite.misc.BaseDaoEnabled;
 
 public class Payment  extends BaseDaoEnabled implements Serializable {
 	
+	
 	@DatabaseField(generatedId = true)
 	private int sid;
 	
@@ -24,6 +25,15 @@ public class Payment  extends BaseDaoEnabled implements Serializable {
 	@DatabaseField()
 	private int quantity;
 	
+	
+	public Payment(int sid, String productName, int price, int quantity) {
+		super();
+		this.sid = sid;
+		this.productName = productName;
+		this.price = price;
+		this.quantity = quantity;
+	}
+
 	public String getProductName() {
 		return productName;
 	}
@@ -52,28 +62,5 @@ public class Payment  extends BaseDaoEnabled implements Serializable {
 		return sid;
 	}
 
-	public static List<Payment> getProducts(){
-		try {
-			return MyConnection.getCon().getHandler().payment.queryForAll();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
-	public void addProduct(Product product) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void deleteProduct() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void getProduct(int sid) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 }

@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 
 import GUI.AddToPaymentGUI;
 import GUI.AirConditionersPanel;
+import GUI.MainScreen;
 import GUI.PaymentPanel;
 import Models.*;
 import Utils.Logger;
@@ -19,7 +20,7 @@ import Utils.Messages;
 
 public class PaymentController implements ActionListener {
 	
-	static ArrayList<Payment> payment = new ArrayList<Payment>();
+	final static ArrayList<Payment> payment = new ArrayList<Payment>();
 	private Product product; 
 	private JFrame app ; 
 
@@ -42,8 +43,19 @@ public class PaymentController implements ActionListener {
 	public PaymentController(PaymentPanel thisref) {
 		// TODO Auto-generated constructor stub
 	}
+	public PaymentController(MainScreen mainScreen) {
+		// TODO Auto-generated constructor stub
+		app=mainScreen;
+	}
 	public void getProductsToGUI(PaymentPanel app) {
 		((PaymentPanel) app).setdata(payment); 
+	}
+	public int calcSum(){
+		int totall=0; 
+	for(Payment i:payment){
+		totall+=i.getPrice()*i.getQuantity();
+		}
+	return totall; 
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -60,9 +72,7 @@ public class PaymentController implements ActionListener {
 		}else {
 			product.setQuantity(product.getQuantity()-counter);
 			product.updateProduct();
-			Payment p = new Payment();
-			p.addProduct(product);
-			p.setQuantity(counter);
+			Payment p = new Payment(product.getSid(),product.getProductName(),product.getPrice(),counter);
 			addProduct(p);
 			Messages.successMessage("product added to payment", "payment", null);
 			Logger.getInstance().debug("added to payment"+payment.toString());
@@ -71,11 +81,14 @@ public class PaymentController implements ActionListener {
 			((AirConditionersPanel) ((AddToPaymentGUI) app).getParentPanel()).getApps_table().getModel().setValueAt(product.getQuantity(), row, 4);
 			((AirConditionersPanel) ((AddToPaymentGUI)app).getParentPanel()).getApps_table().updateUI();
 			app.dispose();
-			
 		}
-		
-
-	
+		break;
+		case "_payment_show": 
+			PaymentPanel guiPayment =new  PaymentPanel(payment,calcSum());
+			guiPayment.getFrame().setVisible(true);
+			
+			
+			break; 
 		}
 		
 	}

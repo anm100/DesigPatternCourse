@@ -24,6 +24,8 @@ import Utils.MyTableModel;
 
 
 
+
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTable;
@@ -46,30 +48,21 @@ import java.util.List;
  * @author Muhamad Igbaria
  *
  */
-public class PaymentPanel extends JPanel {
+public class PaymentPanel extends JFrame {
 
-	/**
-	 */
-	private JPanel app;
-	/**
-	 */
+	private JFrame app;
 	private JTable apps_table;
 	JButton cancel_btn;
 
-	/**
-	 */
 
 	private PaymentPanel thisref=this;
 	private ArrayList<Payment> apps_list= new  ArrayList<Payment>();
 	private ArrayList<Payment> data;
-	PaymentController cont;
+	private int totall; 
 
-	/**
-	 * 
-	 * @param patient
-	 *            : Models Patient instance
-	 */
-	public PaymentPanel() {
+	public PaymentPanel(ArrayList<Payment> data, int sum) {
+		this.data=data;
+		totall=sum; 
 		initialize();
 	}
 	/**
@@ -77,34 +70,30 @@ public class PaymentPanel extends JPanel {
 	 */
 
 	private void initialize() {
-		app = new JPanel();
-
+		app = new JFrame();
+		PaymentController cont = new PaymentController (thisref);
 		app.setForeground(Color.BLACK);
 		app.setFont(new Font("Dialog", Font.PLAIN, 16));
 		app.setBackground(Color.WHITE);
 		app.setBackground(Color.WHITE);
-		app.setLayout(null);
+		app.getContentPane().setLayout(null);
+		setSize(305,317);
+		getContentPane().setLayout(null);
 
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 39, 905, 45);
-		app.add(panel);
+		app.getContentPane().add(panel);
 		panel.setLayout(null);
-
-		JLabel lblPhone = new JLabel("");
-		lblPhone.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblPhone.setBounds(298, 11, 49, 21);
-		panel.add(lblPhone);
 		
-				JLabel logo = new JLabel("Air conditions products ");
-				logo.setBounds(340, 0, 242, 45);
+				JLabel logo = new JLabel("Payment");
+				logo.setBounds(77, 0, 242, 45);
 				panel.add(logo);
 				logo.setForeground(Color.DARK_GRAY);
 				logo.setFont(new Font("Microsoft New Tai Lue", Font.BOLD, 17));
 				logo.setBackground(Color.WHITE);
 
-		 cont=new PaymentController(thisref);
 
-		cancel_btn = new JButton("delete selected product");
+		cancel_btn = new JButton("cancel selected product");
 		cancel_btn.addActionListener((ActionListener) cont);
 		cancel_btn.setActionCommand("_delete_product");
 //		cancel_btn.addActionListener(new ActionListener() {
@@ -130,12 +119,12 @@ public class PaymentPanel extends JPanel {
 //		});
 		cancel_btn.setEnabled(false);
 
-		cancel_btn.setBounds(194, 112, 174, 30);
-		app.add(cancel_btn);
+		cancel_btn.setBounds(10, 112, 174, 30);
+		app.getContentPane().add(cancel_btn);
 
 		JScrollPane apps_scrollPane = new JScrollPane();
-		apps_scrollPane.setBounds(10, 147, 732, 307);
-		app.add(apps_scrollPane);
+		apps_scrollPane.setBounds(10, 147, 356, 218);
+		app.getContentPane().add(apps_scrollPane);
 
 		String[] doc_columnNames = { "sid","product name","price","quantity in store"};
 		Object[][] doc_data = {};
@@ -157,46 +146,30 @@ public class PaymentPanel extends JPanel {
 		action1.setPreferredWidth(1);
 		TableColumn action2 = apps_table.getColumn("quantity in store");
 		action2.setPreferredWidth(30);
-		JButton button = new JButton("order more product");
-		button.setEnabled(false);
-		button.setActionCommand("_order_product");
-		button.addActionListener((ActionListener) cont);
-		button.setBounds(377, 112, 174, 30);
-		app.add(button);
-		JButton newApp_btn = new JButton("Buy & add to Payment");
-		newApp_btn.setEnabled(false);
-		button.addActionListener((ActionListener) cont);
-		button.setActionCommand("_add_product_card");
-		newApp_btn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-//				actionGui=	new AddActionGUI();
-//				actionGui.setAddActionListener(thisref);
-//				actionGui.setVisible(true);
-//			WorkSpace.getLog().debug("add new action button");
-			}
-
-			
-		});
-		JButton button_1 = new JButton("Add new Product");
-		button_1.setBounds(10, 112, 174, 30);
-		app.add(button_1);
 		
 		apps_table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent event) {
 				cancel_btn.setEnabled(true);
-				button.setEnabled(true);
-				newApp_btn.setEnabled(true);
-
 			}
 		});
-
+		app.setBounds(100, 100, 557, 447);
 		
-		newApp_btn.setBounds(561, 112, 174, 30);
-		app.add(newApp_btn);
-
-		// ---------------------------------
-	//	app.getContentPane().setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[] { logo }));
-		app.setBounds(100, 100, 905, 547);
+		JButton button = new JButton("purchase");
+		button.addActionListener((ActionListener) cont);
+		button.setActionCommand("_purchase_product");
+		button.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		button.setBounds(376, 319, 159, 45);
+		app.getContentPane().add(button);
+		
+		JLabel lblNewLabel = new JLabel("Totall:");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblNewLabel.setBounds(376, 168, 159, 45);
+		app.getContentPane().add(lblNewLabel);
+		
+		JLabel lblNumber = new JLabel(""+totall);
+		lblNumber.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblNumber.setBounds(376, 231, 159, 45);
+		app.getContentPane().add(lblNumber);
 		
 	
 		initData();
@@ -223,7 +196,7 @@ public class PaymentPanel extends JPanel {
 	 * 
 	 * @return current JFrame
 	 */
-	public JPanel getFrame() {
+	public JFrame getFrame() {
 		return app;
 	}
 
@@ -237,5 +210,11 @@ public class PaymentPanel extends JPanel {
 	public void setdata(ArrayList<Payment> list){
 		
 		 this.data=list;
+	}
+	public void refreshPayment(ArrayList<Payment> list){
+		setdata(list);
+		initData();
+		apps_table.updateUI();
+		repaint();
 	}
 }
