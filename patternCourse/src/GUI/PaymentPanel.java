@@ -95,7 +95,7 @@ public class PaymentPanel extends JFrame {
 
 		cancel_btn = new JButton("cancel selected product");
 		cancel_btn.addActionListener((ActionListener) cont);
-		cancel_btn.setActionCommand("_delete_product");
+		cancel_btn.setActionCommand("_Cancel_product_payment");
 //		cancel_btn.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent arg0) {
 //				int row = apps_table.getSelectedRow();

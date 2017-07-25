@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 import GUI.AddToPaymentGUI;
 import GUI.AirConditionersPanel;
@@ -42,6 +43,7 @@ public class PaymentController implements ActionListener {
 	}
 	public PaymentController(PaymentPanel thisref) {
 		// TODO Auto-generated constructor stub
+		app=thisref;
 	}
 	public PaymentController(MainScreen mainScreen) {
 		// TODO Auto-generated constructor stub
@@ -86,9 +88,31 @@ public class PaymentController implements ActionListener {
 		case "_payment_show": 
 			PaymentPanel guiPayment =new  PaymentPanel(payment,calcSum());
 			guiPayment.getFrame().setVisible(true);
-			
-			
 			break; 
+		case "_purchase_product":
+			row = ((PaymentPanel) app).getApps_table().getSelectedRow();
+			if(row<0){
+				Messages.errorMessage("payment empty ", "payment empty ", null);
+				return;
+			}
+			if(Messages.confirmMessage("Do you purchase products in this Payment", "product", null)==0){
+				clearPayment();
+				DefaultTableModel dm = (DefaultTableModel) ( (PaymentPanel) app).getApps_table().getModel();
+				((PaymentPanel) app).getFrame().dispose();	
+				Messages.successMessage("Payment has been purchased", "product", null);
+				}
+			break; 
+		case "_Cancel_product_payment":
+			if(Messages.confirmMessage("product delete", "product", null)==0){
+				row = ((PaymentPanel) app).getApps_table().getSelectedRow();
+
+				Payment	product2= (Payment) ((PaymentPanel) app).getApps_list().get(row);
+				((PaymentPanel) app).getApps_list().remove(row);
+				DefaultTableModel dm = (DefaultTableModel) ((PaymentPanel) app).getApps_table().getModel();
+				dm.removeRow(row);		
+				Messages.successMessage("product canceled from this payment", "product", null);
+				}
+		break; 
 		}
 		
 	}
