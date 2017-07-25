@@ -36,16 +36,17 @@ public class MainScreen extends JFrame {
 		);
 		
 		AirConditionersPanel airCond = new AirConditionersPanel();
-		tabbedPane.addTab("AirConditioners", null, airCond.getFrame(), null);
+		tabbedPane.addTab("AirConditioners", null,(new AirConditionersPanel()).getFrame(), null);
 		getContentPane().setLayout(groupLayout);
 		JPanel panel1 = new JPanel();
 		tabbedPane.addTab("Refrigerators", null, panel1, null);
+		
 		getContentPane().setLayout(groupLayout);
 		JPanel panel2 = new JPanel();
 		tabbedPane.addTab("VacuumCleaners", null, panel2, null);
 		
 		JButton button_1 = new JButton("Add selected product to card");
-		tabbedPane.addTab("Payment", null, button_1, null);
+		tabbedPane.addTab("Payment", null, new PaymentPanel().getFrame(), null);
 		getContentPane().setLayout(groupLayout);
 	}
 }

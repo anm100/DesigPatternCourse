@@ -38,9 +38,16 @@ private  AirConditioners thisRef=this;
 	}
 	@Override
 	public void deleteProduct() {
-		// TODO Auto-generated method stub
-		
-	}
+		Logger.getInstance().debug("delete product from database ");
+		 try {
+			Logger.getInstance().debug("get product from database ");
+			MyConnection.getCon().getHandler().airConditioners.deleteById(getSid());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+	}		
+	
 	@Override
 	public void getProduct(int sid) {
 		Logger.getInstance().debug("get product from database ");

@@ -111,27 +111,6 @@ public class AirConditionersPanel extends JPanel {
 		cancel_btn = new JButton("delete selected product");
 		cancel_btn.addActionListener((ActionListener) cont);
 		cancel_btn.setActionCommand("_delete_product");
-//		cancel_btn.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent arg0) {
-//				int row = apps_table.getSelectedRow();
-//				if(row<0){
-//					Messages.errorMessage("Please select an action from the table below", "No action selected", null);
-//					return;
-//				}
-//			
-//				/*	if (ActionCondController.deleteAppointment(apps_list.get(row)) == false) {
-//						JOptionPane.showMessageDialog(cancel_btn, "Cannot complete the request", "Cancel Action",
-//								JOptionPane.ERROR_MESSAGE);
-//					} else {
-//						apps_list.remove(row);
-//						DefaultTableModel dm = (DefaultTableModel) apps_table.getModel();
-//						dm.removeRow(row);
-//						Messages.successMessage("Action Canceled", "Action Appointment", null);
-//					}*/
-//				
-//				cancel_btn.setEnabled(false);
-//			}
-//		});
 		cancel_btn.setEnabled(false);
 
 		cancel_btn.setBounds(194, 112, 174, 30);
