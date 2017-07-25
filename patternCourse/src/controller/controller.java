@@ -8,8 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
-import javax.swing.table.DefaultTableModel;
-
 import GUI.AirConditionersGUI;
 import Models.*;
 import Utils.Logger;
@@ -17,7 +15,6 @@ import Utils.Logger;
 public class controller implements ActionListener {
 
 
-	private ImpDaoProduct daoProduct ; 
 	//ArrayList<Product> 
 	private JPanel app;
 	public controller(AirConditionersGUI app) {
@@ -26,18 +23,20 @@ public class controller implements ActionListener {
 	getProductsToGUI(app);
 	}
 	public void getProductsToGUI(AirConditionersGUI app) {
-		((AirConditionersGUI) app).setdata(AirConditioners.getProducts()); 
+		((AirConditionersGUI) app).setdata((ArrayList<AirConditioners>) AirConditioners.getProducts()); 
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		int row ;
+		Product product;
 		switch (e.getActionCommand())
 		{
 		case ("_order_product"):
 			Logger.getInstance().debug("click order button");
 
-			int row = ((AirConditionersGUI) app).getApps_table().getSelectedRow();
-			AirConditioners  product= (AirConditioners) ((AirConditionersGUI) app).getApps_list().get(row);
+			row = ((AirConditionersGUI) app).getApps_table().getSelectedRow();
+			product= (AirConditioners) ((AirConditionersGUI) app).getApps_list().get(row);
 			
 			Logger.getInstance().debug("add quntity to "+product.getProductName());
 			product.setQuantity(product.getQuantity()+30);
@@ -54,8 +53,14 @@ public class controller implements ActionListener {
 				e1.printStackTrace();
 			}
 			break;
-		case ("_save_Action_param"):
-		//	WorkSpace.getLog().debug("doing add to tables");
+		case ("_add_product_card"):
+			Logger.getInstance().debug("product add to payment /card");
+		row = ((AirConditionersGUI) app).getApps_table().getSelectedRow();
+		product= (AirConditioners) ((AirConditionersGUI) app).getApps_list().get(row);
+		Payment p = new Payment();
+		
+		break;
+
 		}
 		
 	}

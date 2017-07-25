@@ -11,9 +11,8 @@ import java.awt.Font;
 
 public class MainScreen extends JFrame {
 	public MainScreen() {
-		
+		setSize(854,500);
 		JButton button = new JButton("New button");
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
 		tabbedPane.setFont(new Font("Microsoft YaHei", Font.PLAIN, 25));
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
@@ -44,6 +43,9 @@ public class MainScreen extends JFrame {
 		getContentPane().setLayout(groupLayout);
 		JPanel panel2 = new JPanel();
 		tabbedPane.addTab("VacuumCleaners", null, panel2, null);
+		
+		JButton button_1 = new JButton("Add selected product to card");
+		tabbedPane.addTab("Payment", null, button_1, null);
 		getContentPane().setLayout(groupLayout);
 	}
 }

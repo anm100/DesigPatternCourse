@@ -41,4 +41,16 @@ private  AirConditioners thisRef=this;
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public void getProduct(int sid) {
+		Logger.getInstance().debug("get product from database ");
+		 try {
+			Logger.getInstance().debug("get product from database ");
+			setProduct(MyConnection.getCon().getHandler().airConditioners.queryForId(sid)) ;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+	}
+	
 }

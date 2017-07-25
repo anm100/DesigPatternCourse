@@ -1,6 +1,7 @@
 package db;
 
 import Models.AirConditioners;
+import Models.Payment;
 import Models.Refrigerators;
 import Models.VacuumCleaners;
 
@@ -26,10 +27,12 @@ public class DbHandler {
 	public Dao<AirConditioners, Integer> airConditioners;
 
 	public Dao<VacuumCleaners, Integer> vacuumCleaners;
+	public Dao<Payment, Integer> payment;
+
 
 
 	/**
-	 * need to provide url , user ,pass to conenct to database
+	 * need to provide url , user ,pass to conncet to database
 	 * 
 	 * @param url
 	 * @param username
@@ -38,9 +41,9 @@ public class DbHandler {
 	public DbHandler(String url, String username, String password) {
 		try {
 			connection = new JdbcConnectionSource(url, username, password);
-			//createAllTables();
+			createAllTables();
 			initializeDao();
-			//fillDataBase();
+			fillDataBase();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -63,6 +66,8 @@ public class DbHandler {
 		refrigerators = DaoManager.createDao(connection, Refrigerators.class);
 		airConditioners = DaoManager.createDao(connection, AirConditioners.class);
 		vacuumCleaners = DaoManager.createDao(connection, VacuumCleaners.class);
+		payment = DaoManager.createDao(connection, Payment.class);
+
 
 	}
 
@@ -75,9 +80,12 @@ public class DbHandler {
 		TableUtils.dropTable(connection, Refrigerators.class,true);
 		TableUtils.dropTable(connection, AirConditioners.class,true);
 		TableUtils.dropTable(connection, VacuumCleaners.class,true);
+		TableUtils.dropTable(connection, Payment.class,true);
 
 		TableUtils.createTable(connection, Refrigerators.class);
 		TableUtils.createTable(connection, AirConditioners.class);
 		TableUtils.createTable(connection, VacuumCleaners.class);
+		TableUtils.createTable(connection, Payment.class);
+
 	}
 }

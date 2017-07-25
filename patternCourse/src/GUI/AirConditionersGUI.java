@@ -20,6 +20,7 @@ import Utils.MyTableModel;
 
 
 
+
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTable;
@@ -36,6 +37,7 @@ import javax.swing.table.TableColumn;
 import controller.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 /**
  * Appointments window , shows all needed information about specific patient :
  * shows all patient's future appointments sorted in table by appointment time
@@ -63,7 +65,7 @@ public class AirConditionersGUI extends JPanel {
 
 	private AirConditionersGUI thisref=this;
 	private ArrayList<Product> apps_list= new  ArrayList<Product>();
-	private ArrayList<Product> data;
+	private ArrayList<AirConditioners> data;
 	controller cont;
 
 	/**
@@ -87,44 +89,28 @@ public class AirConditionersGUI extends JPanel {
 		app.setBackground(Color.WHITE);
 		app.setLayout(null);
 
-		JLabel logo = new JLabel("Air conditions products ");
-		logo.setBounds(0, 0, 495, 59);
-		logo.setForeground(Color.DARK_GRAY);
-		logo.setFont(new Font("Microsoft New Tai Lue", Font.BOLD, 17));
-		logo.setBackground(Color.WHITE);
-		//logo.setIcon(Resources.getIcon("logo.png"));
-		app.add(logo);
-
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 56, 621, 45);
+		panel.setBounds(0, 39, 905, 45);
 		app.add(panel);
 		panel.setLayout(null);
-
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel.setBounds(10, 11, 126, 21);
-		panel.add(lblNewLabel);
-
-		JLabel name_lbl = new JLabel("");
-		name_lbl.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		name_lbl.setBounds(146, 11, 140, 21);
-		panel.add(name_lbl);
 
 		JLabel lblPhone = new JLabel("");
 		lblPhone.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblPhone.setBounds(298, 11, 49, 21);
 		panel.add(lblPhone);
-
-		JLabel status_lbl = new JLabel("");
-		status_lbl.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		status_lbl.setBounds(339, 11, 85, 21);
-		panel.add(status_lbl);
+		
+				JLabel logo = new JLabel("Air conditions products ");
+				logo.setBounds(340, 0, 242, 45);
+				panel.add(logo);
+				logo.setForeground(Color.DARK_GRAY);
+				logo.setFont(new Font("Microsoft New Tai Lue", Font.BOLD, 17));
+				logo.setBackground(Color.WHITE);
 
 		 cont=new controller(thisref);
 
-		cancel_btn = new JButton("order more product");
+		cancel_btn = new JButton("delete selected product");
 		cancel_btn.addActionListener((ActionListener) cont);
-		cancel_btn.setActionCommand("_order_product");
+		cancel_btn.setActionCommand("_delete_product");
 //		cancel_btn.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent arg0) {
 //				int row = apps_table.getSelectedRow();
@@ -148,11 +134,11 @@ public class AirConditionersGUI extends JPanel {
 //		});
 		cancel_btn.setEnabled(false);
 
-		cancel_btn.setBounds(189, 112, 174, 30);
+		cancel_btn.setBounds(194, 112, 174, 30);
 		app.add(cancel_btn);
 
 		JScrollPane apps_scrollPane = new JScrollPane();
-		apps_scrollPane.setBounds(10, 147, 710, 307);
+		apps_scrollPane.setBounds(10, 147, 732, 307);
 		app.add(apps_scrollPane);
 
 		String[] doc_columnNames = { "sid","product name","production Year","price","quantity in store"};
@@ -175,15 +161,16 @@ public class AirConditionersGUI extends JPanel {
 		action1.setPreferredWidth(1);
 		TableColumn action2 = apps_table.getColumn("quantity in store");
 		action2.setPreferredWidth(30);
-		
-		
-		apps_table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent event) {
-				cancel_btn.setEnabled(true);
-			}
-		});
-
-		JButton newApp_btn = new JButton("Add selected product to card");
+		JButton button = new JButton("order more product");
+		button.setEnabled(false);
+		button.setActionCommand("_order_product");
+		button.addActionListener((ActionListener) cont);
+		button.setBounds(377, 112, 174, 30);
+		app.add(button);
+		JButton newApp_btn = new JButton("Buy & add to Payment");
+		newApp_btn.setEnabled(false);
+		button.addActionListener((ActionListener) cont);
+		button.setActionCommand("_add_product_card");
 		newApp_btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 //				actionGui=	new AddActionGUI();
@@ -194,12 +181,28 @@ public class AirConditionersGUI extends JPanel {
 
 			
 		});
-		newApp_btn.setBounds(10, 112, 174, 30);
+		JButton button_1 = new JButton("Add new Product");
+		button_1.setBounds(10, 112, 174, 30);
+		app.add(button_1);
+		
+		apps_table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent event) {
+				cancel_btn.setEnabled(true);
+				button.setEnabled(true);
+				newApp_btn.setEnabled(true);
+
+			}
+		});
+
+		
+		newApp_btn.setBounds(561, 112, 174, 30);
 		app.add(newApp_btn);
 
 		// ---------------------------------
 	//	app.getContentPane().setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[] { logo }));
-		app.setBounds(100, 100, 730, 547);
+		app.setBounds(100, 100, 905, 547);
+		
+	
 		initData();
 
 	}
@@ -235,9 +238,8 @@ public class AirConditionersGUI extends JPanel {
 	public ArrayList<Product> getApps_list() {
 		return apps_list;
 	}
-	public void setdata(ArrayList<Product> list){
+	public void setdata(ArrayList<AirConditioners> list){
 		
 		 this.data=list;
 	}
-
 }
