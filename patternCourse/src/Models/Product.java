@@ -25,6 +25,11 @@ public abstract class Product  extends BaseDaoEnabled implements Serializable,Da
 	@DatabaseField()
 	private int quantity;
 	
+	
+	public void setSid(int sid) {
+		this.sid = sid;
+	}
+
 	public String getProductName() {
 		return productName;
 	}

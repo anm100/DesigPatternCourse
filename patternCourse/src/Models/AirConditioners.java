@@ -34,7 +34,15 @@ private  AirConditioners thisRef=this;
 	@Override
 	public void addProduct() {
 		// TODO Auto-generated method stub
-		
+		this.setProductionYear(null);
+		Logger.getInstance().debug("add to database ");
+		try {
+			MyConnection.getCon().getHandler().airConditioners.create(thisRef);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 	}
 	@Override
 	public void deleteProduct() {

@@ -14,26 +14,26 @@ import javax.swing.table.DefaultTableModel;
 
 import GUI.AddProductUI;
 import GUI.AddToPaymentGUI;
-import GUI.AirConditionersPanel;
+import GUI.VacumCleanerPanel;
 import Models.*;
 import Utils.Logger;
 import Utils.Messages;
 
-public class AirConditionController implements ActionListener {
+public class VacuumCleanerController implements ActionListener {
 
 
 	//ArrayList<Product> 
-	private AirConditionersPanel app;
-	public AirConditionController(AirConditionersPanel app) {
+	private VacumCleanerPanel app;
+	public VacuumCleanerController(VacumCleanerPanel thisref) {
 		// TODO Auto-generated constructor stub
-	this.app=app;
-	getProductsToGUI(app);
+	this.app=thisref;
+	getProductsToGUI(thisref);
 	}
-	public AirConditionController(JFrame addProduct) {
+	public VacuumCleanerController(JFrame addProduct) {
 		// TODO Auto-generated constructor stub
 	}
-	public void getProductsToGUI(AirConditionersPanel app) {
-		((AirConditionersPanel) app).setdata((ArrayList<AirConditioners>) AirConditioners.getProducts()); 
+	public void getProductsToGUI(VacumCleanerPanel app) {
+		((VacumCleanerPanel) app).setdata((ArrayList<VacuumCleaners>) VacuumCleaners.getProducts()); 
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -50,7 +50,7 @@ public class AirConditionController implements ActionListener {
 				Messages.errorMessage("Please select an product from the table below", "No product selected", null);
 				return;
 			}
-			product= (AirConditioners) (app).getApps_list().get(row);
+			product= (VacuumCleaners) (app).getApps_list().get(row);
 			
 			Logger.getInstance().debug("add quantity to "+product.getProductName());
 			product.setQuantity(product.getQuantity()+30);
@@ -76,12 +76,12 @@ public class AirConditionController implements ActionListener {
 			Messages.errorMessage("Please select an product from the table below", "No product selected", null);
 			return;
 		}
-		AddToPaymentGUI addGui=new AddToPaymentGUI((AirConditionersPanel) app,(AirConditioners) ((AirConditionersPanel) app).getApps_list().get(row));
+		AddToPaymentGUI addGui=new AddToPaymentGUI(app,app.getApps_list().get(row));
 		addGui.setVisible(true);
 		
 		break;
 		case "_add_production":
-		AddProductUI productGui = new  AddProductUI(new AirConditioners(),app);
+		AddProductUI productGui = new  AddProductUI(new VacuumCleaners(),app);
 
 		break;
 			case "_delete_product" : 
@@ -93,10 +93,10 @@ public class AirConditionController implements ActionListener {
 			}
 			if(Messages.confirmMessage("product delete", "product", null)==0){
 	
-					product= (AirConditioners) (app).getApps_list().get(row);
+					product= (VacuumCleaners) (app).getApps_list().get(row);
 					product.deleteProduct();
 					app.getApps_list().remove(row);
-					DefaultTableModel dm = (DefaultTableModel) ((AirConditionersPanel) app).getApps_table().getModel();
+					DefaultTableModel dm = (DefaultTableModel) (app).getApps_table().getModel();
 					dm.removeRow(row);
 				
 					Messages.successMessage("product delete", "product", null);

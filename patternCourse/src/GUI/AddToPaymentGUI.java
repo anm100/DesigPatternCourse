@@ -21,9 +21,9 @@ import java.awt.event.ActionEvent;
 
 public class AddToPaymentGUI extends JFrame {
 	private JTextField textField;
-	private JPanel parent;
+	private InterfaceComposite parent;
 
-	public AddToPaymentGUI(JPanel app,Product p) {
+	public AddToPaymentGUI(InterfaceComposite app,Product p) {
 		this.parent=app;
 		PaymentController con = new PaymentController (this,p);
 		setSize(305,317);
@@ -77,7 +77,7 @@ public class AddToPaymentGUI extends JFrame {
 	public String getTextField() {
 		return textField.getText().toString();
 	}
-	public JPanel getParentPanel() {
+	public InterfaceComposite getParentPanel() {
 		return parent;
 	}
 	

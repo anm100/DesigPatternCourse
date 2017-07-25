@@ -78,10 +78,10 @@ public class PaymentController implements ActionListener {
 			addProduct(p);
 			Messages.successMessage("product added to payment", "payment", null);
 			Logger.getInstance().debug("added to payment"+payment.toString());
-			row=((AirConditionersPanel) ((AddToPaymentGUI)app).getParentPanel()).getApps_table().getSelectedRow();
-			((AirConditionersPanel) ((AddToPaymentGUI)app).getParentPanel()).getApps_list().set(row, product);
-			((AirConditionersPanel) ((AddToPaymentGUI) app).getParentPanel()).getApps_table().getModel().setValueAt(product.getQuantity(), row, 4);
-			((AirConditionersPanel) ((AddToPaymentGUI)app).getParentPanel()).getApps_table().updateUI();
+			row=((((AddToPaymentGUI)app).getParentPanel()).getApps_table().getSelectedRow());
+			( ((AddToPaymentGUI)app).getParentPanel()).getApps_list().set(row, product);
+			( ((AddToPaymentGUI) app).getParentPanel()).getApps_table().getModel().setValueAt(product.getQuantity(), row, 4);
+			( ((AddToPaymentGUI)app).getParentPanel()).getApps_table().updateUI();
 			app.dispose();
 		}
 		break;

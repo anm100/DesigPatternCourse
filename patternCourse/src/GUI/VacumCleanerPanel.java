@@ -8,6 +8,7 @@ import javax.swing.ListSelectionModel;
 
 import Models.AirConditioners;
 import Models.Product;
+import Models.VacuumCleaners;
 import Utils.MyTableModel;
 
 import javax.swing.JPanel;
@@ -24,11 +25,13 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 import controller.AirConditionController;
+import controller.RefrigeratorsController;
+import controller.VacuumCleanerController;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AirConditionersPanel extends JPanel implements InterfaceComposite{
+public class VacumCleanerPanel extends JPanel implements InterfaceComposite{
 
 	/**
 	 * appointments frame
@@ -44,10 +47,10 @@ public class AirConditionersPanel extends JPanel implements InterfaceComposite{
 	 * the patient to show his information
 	 */
 
-	private AirConditionersPanel thisref=this;
+	private VacumCleanerPanel thisref=this;
 	private ArrayList<Product> apps_list= new  ArrayList<Product>();
-	private ArrayList<AirConditioners> data;
-	AirConditionController cont;
+	private ArrayList<VacuumCleaners> data;
+	VacuumCleanerController cont;
 	MainScreen mainScreen; 
 
 	/**
@@ -56,7 +59,7 @@ public class AirConditionersPanel extends JPanel implements InterfaceComposite{
 	 * 
 	 *            : Models Patient instance
 	 */
-	public AirConditionersPanel(MainScreen mainScreen) {
+	public VacumCleanerPanel(MainScreen mainScreen) {
 		this.mainScreen=mainScreen;
 		initialize();
 	}
@@ -90,7 +93,7 @@ public class AirConditionersPanel extends JPanel implements InterfaceComposite{
 				logo.setFont(new Font("Microsoft New Tai Lue", Font.BOLD, 17));
 				logo.setBackground(Color.WHITE);
 
-		 cont=new AirConditionController(thisref);
+		 cont=new VacuumCleanerController(thisref);
 
 		cancel_btn = new JButton("delete selected product");
 		cancel_btn.addActionListener((ActionListener) cont);
@@ -194,7 +197,7 @@ public class AirConditionersPanel extends JPanel implements InterfaceComposite{
 	public ArrayList<Product> getApps_list() {
 		return apps_list;
 	}
-	public void setdata(ArrayList<AirConditioners> list){
+	public void setdata(ArrayList<VacuumCleaners> list){
 		
 		 this.data=list;
 	}	
