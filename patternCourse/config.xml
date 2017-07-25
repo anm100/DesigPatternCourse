@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<company>
+	<databaseConnection >
+		<url>jdbc:mysql://localhost/test</url>
+		<username>root</username>
+		<password>123123</password>
+	</databaseConnection>
+	
+</company>

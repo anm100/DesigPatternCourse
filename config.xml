@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<company>
+	<databaseConnection >
+		<url>yong</url>
+		<username>mook kim</username>
+		<password>mkyong</password>
+	</databaseConnection>
+	
+</company>

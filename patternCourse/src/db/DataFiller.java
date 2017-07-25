@@ -64,7 +64,7 @@ public class DataFiller {
 			VacuumCleaners d = new VacuumCleaners();
 			d.setPrice(800+ rand.nextInt(2000));
 			d.setProductionYear(Utils.DateTime.getDate(2000 + rand.nextInt(16), rand.nextInt(12), rand.nextInt(29)));
-			d.setProductName("Refrigerators_"+i);
+			d.setProductName("Vicum cleaner_"+i);
 			d.setQuantity(500+ rand.nextInt(100));
 			db.vacuumCleaners.create(d);
 		}

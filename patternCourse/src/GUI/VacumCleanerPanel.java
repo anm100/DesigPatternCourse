@@ -86,7 +86,7 @@ public class VacumCleanerPanel extends JPanel implements InterfaceComposite{
 		lblPhone.setBounds(298, 11, 49, 21);
 		panel.add(lblPhone);
 		
-				JLabel logo = new JLabel("Air conditions products ");
+				JLabel logo = new JLabel("Vacum Cleaner products ");
 				logo.setBounds(340, 0, 242, 45);
 				panel.add(logo);
 				logo.setForeground(Color.DARK_GRAY);

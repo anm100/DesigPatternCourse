@@ -11,6 +11,7 @@ public class Application {
 		
 		MyConnection con = MyConnection.getCon();
 		MainScreen m=new MainScreen();
+		con.printConfig();
 		m.setVisible(true);
 		
 	}
