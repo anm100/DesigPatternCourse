@@ -1,5 +1,5 @@
 package Models;
 
-public class Refrigerators extends products{
+public class Refrigerators extends Product{
 
 }

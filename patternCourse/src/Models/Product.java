@@ -2,35 +2,29 @@ package Models;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.misc.BaseDaoEnabled;
 
-public abstract class products  extends BaseDaoEnabled implements Serializable  {
+public class Product  extends BaseDaoEnabled implements Serializable,DaoInterface {
 	
 	@DatabaseField(generatedId = true)
 	private int sid;
+
 	
-	/**
-	 * The person last name 
-	 */
 	@DatabaseField()
 	private String productName;
-	/**
-	 * The person first name 
-	 */
+
 	@DatabaseField()
 	private Date productionYear;
 	
 	@DatabaseField()
 	private int price;
 	
-	/**
-	 * The person phone 
-	 */
 	@DatabaseField()
 	private int quantity;
-
+	
 	public String getProductName() {
 		return productName;
 	}
@@ -66,7 +60,23 @@ public abstract class products  extends BaseDaoEnabled implements Serializable  
 	public int getSid() {
 		return sid;
 	}
-	
-	
 
+	@Override
+	public boolean updateProduct() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void addProduct() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteProduct() {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }

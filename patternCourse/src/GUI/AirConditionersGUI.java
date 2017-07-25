@@ -7,10 +7,12 @@ import javax.swing.JLabel;
 import javax.swing.ListSelectionModel;
 
 import Models.AirConditioners;
+import Models.Product;
 import Utils.Messages;
 import Utils.MyTableModel;
 
 //import org.eclipse.wb.swing.FocusTraversalOnArray;
+
 
 
 
@@ -43,7 +45,7 @@ import java.util.ArrayList;
  * @author Muhamad Igbaria
  *
  */
-public class AirConditionersGUI extends JPanel implements ActionListener  {
+public class AirConditionersGUI extends JPanel {
 
 	/**
 	 * appointments frame
@@ -60,8 +62,10 @@ public class AirConditionersGUI extends JPanel implements ActionListener  {
 	 */
 
 	private AirConditionersGUI thisref=this;
-	private ArrayList<AirConditioners> apps_list=new ArrayList<AirConditioners>();
-	private ArrayList<AirConditioners> data;
+	private ArrayList<Product> apps_list= new  ArrayList<Product>();
+	private ArrayList<Product> data;
+	controller cont;
+
 	/**
 	 * 
 	 * @param patient
@@ -114,33 +118,34 @@ public class AirConditionersGUI extends JPanel implements ActionListener  {
 		JLabel status_lbl = new JLabel("");
 		status_lbl.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		status_lbl.setBounds(339, 11, 85, 21);
-
 		panel.add(status_lbl);
 
-	
+		 cont=new controller(thisref);
 
 		cancel_btn = new JButton("order more product");
-		cancel_btn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				int row = apps_table.getSelectedRow();
-				if(row<0){
-					Messages.errorMessage("Please select an action from the table below", "No action selected", null);
-					return;
-				}
-			
-				/*	if (ActionCondController.deleteAppointment(apps_list.get(row)) == false) {
-						JOptionPane.showMessageDialog(cancel_btn, "Cannot complete the request", "Cancel Action",
-								JOptionPane.ERROR_MESSAGE);
-					} else {
-						apps_list.remove(row);
-						DefaultTableModel dm = (DefaultTableModel) apps_table.getModel();
-						dm.removeRow(row);
-						Messages.successMessage("Action Canceled", "Action Appointment", null);
-					}*/
-				
-				cancel_btn.setEnabled(false);
-			}
-		});
+		cancel_btn.addActionListener((ActionListener) cont);
+		cancel_btn.setActionCommand("_order_product");
+//		cancel_btn.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent arg0) {
+//				int row = apps_table.getSelectedRow();
+//				if(row<0){
+//					Messages.errorMessage("Please select an action from the table below", "No action selected", null);
+//					return;
+//				}
+//			
+//				/*	if (ActionCondController.deleteAppointment(apps_list.get(row)) == false) {
+//						JOptionPane.showMessageDialog(cancel_btn, "Cannot complete the request", "Cancel Action",
+//								JOptionPane.ERROR_MESSAGE);
+//					} else {
+//						apps_list.remove(row);
+//						DefaultTableModel dm = (DefaultTableModel) apps_table.getModel();
+//						dm.removeRow(row);
+//						Messages.successMessage("Action Canceled", "Action Appointment", null);
+//					}*/
+//				
+//				cancel_btn.setEnabled(false);
+//			}
+//		});
 		cancel_btn.setEnabled(false);
 
 		cancel_btn.setBounds(189, 112, 174, 30);
@@ -195,8 +200,6 @@ public class AirConditionersGUI extends JPanel implements ActionListener  {
 		// ---------------------------------
 	//	app.getContentPane().setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[] { logo }));
 		app.setBounds(100, 100, 730, 547);
-		
-		controller cont=new controller(thisref);
 		initData();
 
 	}
@@ -208,7 +211,7 @@ public class AirConditionersGUI extends JPanel implements ActionListener  {
 			dm.setRowCount(0);
 			if (apps_list != null && apps_list.size() > 0)
 				apps_list.clear();
-			for (AirConditioners a : data) {
+			for (Product  a : data) {
 				dm.addRow(new Object[] { a.getSid(),a.getProductName()
 						,a.getProductionYear(),a.getPrice(),a.getQuantity()});
 				apps_list.add(a);
@@ -229,39 +232,12 @@ public class AirConditionersGUI extends JPanel implements ActionListener  {
 	public JTable getApps_table() {
 		return apps_table;
 	}
-	public ArrayList<AirConditioners> getApps_list() {
+	public ArrayList<Product> getApps_list() {
 		return apps_list;
 	}
-	public void setdata(ArrayList<AirConditioners> list){
+	public void setdata(ArrayList<Product> list){
 		
 		 this.data=list;
 	}
 
-
-
-
-	/*public void setData(ArrayList<String> data) {
-		this.data = data;
-	}*/
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		switch (arg0.getActionCommand())
-		{
-//		case ("_save_Condition"):
-//			//addConditionToTextArea(switchTo);
-//			break;
-//		case ("_save_Action_param"):
-//			WorkSpace.getLog().debug("doing add to tables");
-//
-//			//addActionArrayList(switchTo);
-//		DefaultTableModel dm = (DefaultTableModel) apps_table.getModel();
-//		dm.addRow(new Object[] {actionGui.getParameterNameCombo(),actionGui.getParameterValueCombo()});
-////
-//			apps_list.add(actionGui.getParameterNameCombo()+"="+actionGui.getParameterValueCombo());
-//			actionGui.dispose();
-//			break;
-		
-		}
-	}
 }
