@@ -1,10 +1,9 @@
 package db;
 
+import Models.AirConditioners;
 import Models.Payment;
-import Models.CarInsurance;
-import Models.Client;
-import Models.OtherInsurance;
-import Models.CustomerClaims;
+import Models.Refrigerators;
+import Models.VacuumCleaners;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
@@ -24,12 +23,10 @@ public class DbHandler {
 
 	private ConnectionSource connection;
 
-	public Dao<CarInsurance, Integer> CarInsurance;
-	public Dao<Client, Integer> client;
-	public Dao<CustomerClaims, Integer> customerClaims;
+	public Dao<Refrigerators, Integer> refrigerators;
+	public Dao<AirConditioners, Integer> airConditioners;
 
-	public Dao<OtherInsurance, Integer> OtherInsurance;
-
+	public Dao<VacuumCleaners, Integer> vacuumCleaners;
 
 	/**
 	 * need to provide url , user ,pass to conncet to database
@@ -41,7 +38,7 @@ public class DbHandler {
 	public DbHandler(String url, String username, String password) {
 		try {
 			connection = new JdbcConnectionSource(url, username, password);
-			createAllTables();
+		//	createAllTables();
 			initializeDao();
 		//	fillDataBase();
 		} catch (Exception e) {
@@ -56,13 +53,16 @@ public class DbHandler {
 	 */
 	public void fillDataBase() throws Exception {
 		DataFiller df = new DataFiller(this);
+		df.fillAirConditioners();
+		df.fillRefrigerators();
+		df.fillVacuumCleaners();
+
 	}
 		
 	public void initializeDao() throws Exception {
-		CarInsurance = DaoManager.createDao(connection, CarInsurance.class);
-		OtherInsurance = DaoManager.createDao(connection, OtherInsurance.class);
-		client = DaoManager.createDao(connection, Client.class);
-		customerClaims = DaoManager.createDao(connection, CustomerClaims.class);
+		refrigerators = DaoManager.createDao(connection, Refrigerators.class);
+		airConditioners = DaoManager.createDao(connection, AirConditioners.class);
+		vacuumCleaners = DaoManager.createDao(connection, VacuumCleaners.class);
 
 
 	}
@@ -73,16 +73,13 @@ public class DbHandler {
 	 * @throws Exception
 	 */
 	public void createAllTables() throws Exception {
-		TableUtils.dropTable(connection, CarInsurance.class,true);
-		TableUtils.dropTable(connection, Client.class,true);
-		TableUtils.dropTable(connection, OtherInsurance.class,true);
-		TableUtils.dropTable(connection, CustomerClaims.class,true);
+		TableUtils.dropTable(connection, Refrigerators.class,true);
+		TableUtils.dropTable(connection, AirConditioners.class,true);
+		TableUtils.dropTable(connection, VacuumCleaners.class,true);
 
-		
-		TableUtils.createTable(connection, Client.class);
-		TableUtils.createTable(connection, CustomerClaims.class);
-		TableUtils.createTable(connection, CarInsurance.class);
-		TableUtils.createTable(connection, OtherInsurance.class);
+		TableUtils.createTable(connection, Refrigerators.class);
+		TableUtils.createTable(connection, AirConditioners.class);
+		TableUtils.createTable(connection, VacuumCleaners.class);
 
 	}
 }

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import javax.swing.JTable;
 
-import Models.Insurance;
+import Models.Product;
 
 public interface InterfaceComposite {
 	public JTable getApps_table();
-	public ArrayList<Insurance> getApps_list();
+	public ArrayList<Product> getApps_list();
 }

@@ -8,9 +8,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
-import Models.AirConditioners;
-import Models.Refrigerators;
-import Models.VacuumCleaners;
+import Models.CarInsurance;
 import Utils.DateTime;
 
 
@@ -37,39 +35,6 @@ public class DataFiller {
 
 	}
 
-	public void fillAirConditioners() throws SQLException {
-		for (int i = 0; i < 10; i++) {
-			AirConditioners d = new AirConditioners();
-			d.setPrice(800+ rand.nextInt(2000));
-			d.setProductionYear(Utils.DateTime.getDate(2000 + rand.nextInt(16), rand.nextInt(12), rand.nextInt(29)));
-			d.setProductName("AirConditioners home_"+i);
-			d.setQuantity(500+ rand.nextInt(100));
-			db.airConditioners.create(d);
-		}
-
-	}
-	public void fillRefrigerators() throws SQLException {
-		for (int i = 0; i < 10; i++) {
-			Refrigerators d = new Refrigerators();
-			d.setPrice(800+ rand.nextInt(2000));
-			d.setProductionYear(Utils.DateTime.getDate(2000 + rand.nextInt(16), rand.nextInt(12), rand.nextInt(29)));
-			d.setProductName("Refrigerators_"+i);
-			d.setQuantity(500+ rand.nextInt(100));
-			db.refrigerators.create(d);
-		}
-
-	}
-	public void fillVacuumCleaners() throws SQLException {
-		for (int i = 0; i < 10; i++) {
-			VacuumCleaners d = new VacuumCleaners();
-			d.setPrice(800+ rand.nextInt(2000));
-			d.setProductionYear(Utils.DateTime.getDate(2000 + rand.nextInt(16), rand.nextInt(12), rand.nextInt(29)));
-			d.setProductName("Vicum cleaner_"+i);
-			d.setQuantity(500+ rand.nextInt(100));
-			db.vacuumCleaners.create(d);
-		}
-
-	}
 
 
 

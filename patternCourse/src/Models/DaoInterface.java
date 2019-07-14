@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public interface DaoInterface {
 	
-	public boolean updateProduct();
-	public void addProduct();
-	public void deleteProduct(); 
-	public void getProduct(int sid);
+	public boolean updateItem();
+	public void addItem();
+	public void deleteItem(); 
+	public void getItem(int sid);
 	
 
 }
